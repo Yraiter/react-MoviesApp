@@ -5,7 +5,7 @@ import './movieCard.css';
 
 const movieCard = (props) => {
     return (
-        <li className="movie-item">
+        <li className="movie-item" onClick={props.ShowHide}>
             <img src={props.img} alt="" />
             <div className="movie-description">
                 <h2>{props.title}</h2>
