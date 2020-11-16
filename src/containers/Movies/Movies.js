@@ -17,10 +17,9 @@ class Movies extends React.Component {
         console.log("Movies Page: componentDidMount")
         axios.get('https://api.tvmaze.com/shows')
             .then((response) => {
-                const moviesRes = response.data.slice(0, 5)
-                console.log(moviesRes)
+                const moviesRes = response.data.splice(0, 10)
                 this.setState({ movies: moviesRes })
-                console.log(this.state.movies)
+                // console.log(this.state.movies)
             });
     }
 
@@ -31,27 +30,18 @@ class Movies extends React.Component {
     }
 
     render() {
-        // const movies = this.state.movies.map(movie => {
-        //     return <MovieCard
-        //         key={movie.id}
-        //         title={movie.name}
-        //         genres={movie.genres}
-        //         img={movie.image.medium}
-        //         clicked={() => this.postSelectedHandler(movie.id)} />;
-        // });
-
-        const movies = this.state.movies.map(movie => {
+        const moviesTo = this.state.movies.map(movie => {
             return <MovieCard
                 key={movie.id}
-                title={movie.title}
+                title={movie.name}
                 img={movie.image.medium}
             />
         });
-
+        console.log(moviesTo)
         return (
             <section>
                 <ul className="movies">
-                    {movies}
+                    {moviesTo}
                 </ul>
             </section>
         )

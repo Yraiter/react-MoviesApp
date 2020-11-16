@@ -3,21 +3,18 @@ import React, { Component } from 'react';
 
 import FullMovie from '../../components/FullMovie/FullMovie';
 import NewMovie from '../../components/NewMovie/NewMovie';
-import Movies from '.././Movies/Movies'
+import Movies from '../Movies/Movies';
 import './MainPage.css';
 
 class MainPage extends Component {
 
 
-
-
     componentDidMount() {
-        console.log("Main Page: componentDidMount")
+
     }
 
 
     render() {
-
 
         return (
             <div>

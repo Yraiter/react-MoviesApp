@@ -1,24 +1,43 @@
-.Cover {
-    object-fit: cover;
-    background-repeat: no-repeat;
-    width: 100%;
-    height: 100%;
+ ul {
+    display: align;
+    padding: 10px;
   }
-
-  .FrontCard {
-    width: 100%;
-    height: 100%;
-    display: block;
-    margin: 60px auto;
-    box-shadow: 10px 5px 40px 20px darken(#341cac, 5%);
-    transition: 0.25s;
+  
+  .movie-item {
+    flex-basis: 22%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 18px;
+    list-style: none;
+    box-sizing: border-box;
+    margin: 1.5%;
+    border: 1px solid #eee;
+    background: white;
+    text-align: center;
+    
   }
-
-  .FrontCard:hover {
-    box-shadow: 10px 5px 40px 20px darken(#341cac, 10%);
+  
+  .movie-item img {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background-size: cover;
+  }
+  
+  .movie-item:hover {
+    transform: scale(1.15);
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.6);
+  }
+  .movie-item {
+    transition: 0.5s ease;
     cursor: pointer;
+    margin:30px;
   }
 
-  .FrontCard .button-primary {
-    transform: translate(10px, 0);
-  }
+
+  
+
+  
+
+  
+
+  
