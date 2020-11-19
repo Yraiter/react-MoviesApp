@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 
+
 import Movies from '../Movies/Movies';
 import './MainPage.css';
 

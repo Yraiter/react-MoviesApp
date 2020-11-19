@@ -33,14 +33,13 @@ class Movies extends React.Component {
     }
 
     ShowHideFullHandler = () => {
-
         this.setState({ showFull: !this.state.showFull })
-    };
+    }
 
-    // HideShowFullContinueHandler = () => {
-    //     this.setState({ showFull: flase });
-    //     alert('You continue!');
-    // }
+    ShowHideFullHandlerBackD = () => {
+        this.setState({ showFull: !this.state.showFull })
+    }
+
 
 
     render() {
@@ -50,13 +49,13 @@ class Movies extends React.Component {
                 title={movie.name}
                 img={movie.image.medium}
                 ShowHide={this.ShowHideFullHandler}
-            // purchaseContinued={this.HideShowFullContinueHandler}
+                purchaseContinued={this.HideShowFullContinueHandler}
             />
         });
         console.log(moviesTo)
         return (
             <React.Fragment>
-                <Modal show={this.state.showFull} modalClosed={this.ShowHideFullHandler}>
+                <Modal show={this.state.showFull} ShowHideBackD={this.ShowHideFullHandlerBackD}>
                     <FullMovie />
                 </Modal>
                 <ul className="movies">
@@ -69,4 +68,4 @@ class Movies extends React.Component {
     }
 }
 
-export default React.memo(Movies);
+export default Movies;
