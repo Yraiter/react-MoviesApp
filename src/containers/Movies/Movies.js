@@ -11,24 +11,25 @@ export default function Movies() {
 
     //create states using hooks
     const [movies, setMovies] = useState('')
-    // const [selectedMovieId, setSelectedMovieId] = useState(null)
+    const [selectedMovieId, setSelectedMovieId] = useState(null)
     const [showFull, setShowFull] = useState(false)
 
 
     useEffect(() => {
-        axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
+        axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=ab2fefad2fb133b8288873e93a86f02e&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
             .then((response) => {
-                // console.log("this is api key " + process.env.REACT_APP_TMDB_API_KEY)
+                console.log("this is api jet" + process.env.REACT_APP_TMDB_API_KEY)
                 const moviesRes = response.data.results
                 // console.log(moviesRes)
                 setMovies(moviesRes)
             })
             .catch(err => console.log("this is an error" + err))
+        console.log(movies)
     }, [])
 
-    // const postSelectedHandler = id => {
-    //     setSelectedMovieId(id);
-    // }
+    const postSelectedHandler = id => {
+        setSelectedMovieId(id);
+    }
 
     const HideShowFullContinueHandler = () => {
         setShowFull(!showFull)
