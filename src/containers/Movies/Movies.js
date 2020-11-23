@@ -11,7 +11,7 @@ export default function Movies() {
 
     //create states using hooks
     const [movies, setMovies] = useState('')
-    const [selectedMovieId, setSelectedMovieId] = useState(null)
+    // const [selectedMovieId, setSelectedMovieId] = useState(null)
     const [showFull, setShowFull] = useState(false)
 
 
@@ -24,12 +24,11 @@ export default function Movies() {
                 setMovies(moviesRes)
             })
             .catch(err => console.log("this is an error" + err))
-        console.log(movies)
     }, [])
 
-    const postSelectedHandler = id => {
-        setSelectedMovieId(id);
-    }
+    // const postSelectedHandler = id => {
+    //     setSelectedMovieId(id);
+    // }
 
     const HideShowFullContinueHandler = () => {
         setShowFull(!showFull)
