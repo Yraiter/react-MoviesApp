@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
 import MovieCard from '../../components/MovieCard/MovieCard';
@@ -7,66 +7,59 @@ import Modal from '../../components/UI/Modal/Modal';
 
 import "./Movies.css";
 
-class Movies extends React.Component {
+export default function Movies() {
 
-    //State can be initialized within Constructor after calling super
-    state = {
-        movies: [],
-        selectedMovieId: null,
-        showFull: false
-    }
+    //create states using hooks
+    const [movies, setMovies] = useState('')
+    // const [selectedMovieId, setSelectedMovieId] = useState(null)
+    const [showFull, setShowFull] = useState(false)
 
-    componentDidMount() {
-        console.log("Movies Page: componentDidMount")
-        axios.get('https://api.tvmaze.com/shows')
+
+    useEffect(() => {
+        axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=ab2fefad2fb133b8288873e93a86f02e&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
             .then((response) => {
-                const moviesRes = response.data.splice(0, 10)
-                this.setState({ movies: moviesRes })
-                // console.log(this.state.movies)
-            });
-    }
+                console.log("this is api jet" + process.env.REACT_APP_TMDB_API_KEY)
+                const moviesRes = response.data.results
+                // console.log(moviesRes)
+                setMovies(moviesRes)
+            })
+            .catch(err => console.log("this is an error" + err))
+    }, [])
 
-
-    //Thanks to ES7, we can skip the constructor and use a simpler syntax to declare methods:
-    postSelectedHandler = id => {
-        this.setState({ selectedPostId: id });
-    }
-
-    ShowHideFullHandler = () => {
-
-        this.setState({ showFull: !this.state.showFull })
-    };
-
-    // HideShowFullContinueHandler = () => {
-    //     this.setState({ showFull: flase });
-    //     alert('You continue!');
+    // const postSelectedHandler = id => {
+    //     setSelectedMovieId(id);
     // }
 
-
-    render() {
-        const moviesTo = this.state.movies.map(movie => {
-            return <MovieCard
-                key={movie.id}
-                title={movie.name}
-                img={movie.image.medium}
-                ShowHide={this.ShowHideFullHandler}
-            // purchaseContinued={this.HideShowFullContinueHandler}
-            />
-        });
-        console.log(moviesTo)
-        return (
-            <React.Fragment>
-                <Modal show={this.state.showFull} modalClosed={this.ShowHideFullHandler}>
-                    <FullMovie />
-                </Modal>
-                <ul className="movies">
-                    {moviesTo}
-                </ul>
-            </React.Fragment>
-
-
-        )
+    const HideShowFullContinueHandler = () => {
+        setShowFull(!showFull)
     }
-}
 
-export default React.memo(Movies);
+
+
+    const moviesTo = Object.keys(movies).map((key, Indexmovie) => {
+        // console.log(movies[Indexmovie])
+
+        return <MovieCard
+            key={key}
+            title={movies[Indexmovie].title}
+            img={movies[Indexmovie].poster_path}
+            ShowHide={HideShowFullContinueHandler}
+            purchaseContinued={HideShowFullContinueHandler}
+        />
+    })
+
+
+    return (
+        < >
+            <Modal
+                show={showFull}
+                ShowHideBackD={HideShowFullContinueHandler}
+            >
+                <FullMovie />
+            </Modal>
+            <ul className="movies">
+                {moviesTo}
+            </ul>
+        </ >
+    )
+}

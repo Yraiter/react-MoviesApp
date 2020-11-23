@@ -1,6 +1,6 @@
  ul {
     display: align;
-    padding: 10px;
+    padding: 20px;
   }
   
   .movie-item {
@@ -9,8 +9,6 @@
     flex-direction: column;
     border-radius: 18px;
     list-style: none;
-    box-sizing: border-box;
-    margin: 1.5%;
     border: 1px solid #eee;
     background: white;
     text-align: center;
@@ -20,7 +18,8 @@
   .movie-item img {
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    background-size: cover;
+    /* background-size: cover; */
+    overflow: hidden; 
   }
   
   .movie-item:hover {
@@ -32,7 +31,6 @@
     cursor: pointer;
     margin:30px;
   }
-
 
   
 
