@@ -11,22 +11,24 @@ export default function Movies() {
 
     //create states using hooks
     const [movies, setMovies] = useState('')
-    const [selectedMovieId, setSelectedMovieId] = useState(null)
+    // const [selectedMovieId, setSelectedMovieId] = useState(null)
     const [showFull, setShowFull] = useState(false)
 
+
     useEffect(() => {
-        axios.get('https://api.tvmaze.com/shows')
+        axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
             .then((response) => {
-                const moviesRes = response.data.splice(0, 10)
+                // console.log("this is api key " + process.env.REACT_APP_TMDB_API_KEY)
+                const moviesRes = response.data.results
+                // console.log(moviesRes)
                 setMovies(moviesRes)
             })
-            .catch(err => console.log(err))
-        // console.log(movies)
+            .catch(err => console.log("this is an error" + err))
     }, [])
 
-    const postSelectedHandler = id => {
-        setSelectedMovieId(id);
-    }
+    // const postSelectedHandler = id => {
+    //     setSelectedMovieId(id);
+    // }
 
     const HideShowFullContinueHandler = () => {
         setShowFull(!showFull)
@@ -36,10 +38,11 @@ export default function Movies() {
 
     const moviesTo = Object.keys(movies).map((key, Indexmovie) => {
         // console.log(movies[Indexmovie])
+
         return <MovieCard
             key={key}
-            title={movies[Indexmovie].name}
-            img={movies[Indexmovie].image.medium}
+            title={movies[Indexmovie].title}
+            img={movies[Indexmovie].poster_path}
             ShowHide={HideShowFullContinueHandler}
             purchaseContinued={HideShowFullContinueHandler}
         />
