@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
 import MovieCard from '../../components/MovieCard/MovieCard';
@@ -7,65 +7,56 @@ import Modal from '../../components/UI/Modal/Modal';
 
 import "./Movies.css";
 
-class Movies extends React.Component {
+export default function Movies() {
 
-    //State can be initialized within Constructor after calling super
-    state = {
-        movies: [],
-        selectedMovieId: null,
-        showFull: false
-    }
+    //create states using hooks
+    const [movies, setMovies] = useState('')
+    const [selectedMovieId, setSelectedMovieId] = useState(null)
+    const [showFull, setShowFull] = useState(false)
 
-    componentDidMount() {
-        console.log("Movies Page: componentDidMount")
+    useEffect(() => {
         axios.get('https://api.tvmaze.com/shows')
             .then((response) => {
                 const moviesRes = response.data.splice(0, 10)
-                this.setState({ movies: moviesRes })
-                // console.log(this.state.movies)
-            });
+                setMovies(moviesRes)
+            })
+            .catch(err => console.log(err))
+        // console.log(movies)
+    }, [])
+
+    const postSelectedHandler = id => {
+        setSelectedMovieId(id);
     }
 
-
-    //Thanks to ES7, we can skip the constructor and use a simpler syntax to declare methods:
-    postSelectedHandler = id => {
-        this.setState({ selectedPostId: id });
-    }
-
-    ShowHideFullHandler = () => {
-        this.setState({ showFull: !this.state.showFull })
-    }
-
-    ShowHideFullHandlerBackD = () => {
-        this.setState({ showFull: !this.state.showFull })
+    const HideShowFullContinueHandler = () => {
+        setShowFull(!showFull)
     }
 
 
 
-    render() {
-        const moviesTo = this.state.movies.map(movie => {
-            return <MovieCard
-                key={movie.id}
-                title={movie.name}
-                img={movie.image.medium}
-                ShowHide={this.ShowHideFullHandler}
-                purchaseContinued={this.HideShowFullContinueHandler}
-            />
-        });
-        console.log(moviesTo)
-        return (
-            <React.Fragment>
-                <Modal show={this.state.showFull} ShowHideBackD={this.ShowHideFullHandlerBackD}>
-                    <FullMovie />
-                </Modal>
-                <ul className="movies">
-                    {moviesTo}
-                </ul>
-            </React.Fragment>
+    const moviesTo = Object.keys(movies).map((key, Indexmovie) => {
+        // console.log(movies[Indexmovie])
+        return <MovieCard
+            key={key}
+            title={movies[Indexmovie].name}
+            img={movies[Indexmovie].image.medium}
+            ShowHide={HideShowFullContinueHandler}
+            purchaseContinued={HideShowFullContinueHandler}
+        />
+    })
 
 
-        )
-    }
+    return (
+        < >
+            <Modal
+                show={showFull}
+                ShowHideBackD={HideShowFullContinueHandler}
+            >
+                <FullMovie />
+            </Modal>
+            <ul className="movies">
+                {moviesTo}
+            </ul>
+        </ >
+    )
 }
-
-export default Movies;
