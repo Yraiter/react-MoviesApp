@@ -1,21 +1,23 @@
 // import React, { Component } from 'react';
-
-
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import Movies from '../Movies/Movies';
 import Sidebar from '../Sidebar/Sidebar';
 import Header from '../Header/Header';
 import './MainPage.css';
-import axios from 'axios'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 class MainPage extends React.Component {
 
 
     render() {
         return (
             <>
-                <section>
+                <Router>
                     <Header />
-                </section>
+                    <Switch>
+
+                    </Switch>
+                </Router>
                 <section className="main">
                     <Sidebar />
                     <Movies />

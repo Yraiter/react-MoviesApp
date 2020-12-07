@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
 import MovieCard from '../../components/MovieCard/MovieCard';
-import FullMovie from '../../components/FullMovie/FullMovie';
+// import FullMovie from '../../components/FullMovie/FullMovie';
 import Modal from '../../components/UI/Modal/Modal';
+
 
 import "./Movies.css";
 
@@ -11,7 +12,7 @@ export default function Movies() {
 
     //create states using hooks
     const [movies, setMovies] = useState('')
-    // const [selectedMovieId, setSelectedMovieId] = useState(null)
+    const [selectedMovieId, setSelectedMovieID] = useState(null)
     const [showFull, setShowFull] = useState(false)
 
 
@@ -21,45 +22,64 @@ export default function Movies() {
                 console.log("this is api jet" + process.env.REACT_APP_TMDB_API_KEY)
                 const moviesRes = response.data.results
                 // console.log(moviesRes)
+                // console.log(moviesRes)
                 setMovies(moviesRes)
             })
             .catch(err => console.log("this is an error" + err))
     }, [])
 
-    // const postSelectedHandler = id => {
-    //     setSelectedMovieId(id);
-    // }
+    const SelectedHandler = id => {
+        console.log(id)
+        setSelectedMovieID(id);
+    }
 
-    const HideShowFullContinueHandler = () => {
+    const HideShowHandler = () => {
         setShowFull(!showFull)
     }
 
+    const findMovieByID = (id) => {
+        console.log("findMovie BY ID: " + id)
+        return movies.filter((key, Indexmovie) => {
+            if (movies[Indexmovie].id == id) {
+                return movies[Indexmovie]
+            }
+        })
 
+    }
 
-    const moviesTo = Object.keys(movies).map((key, Indexmovie) => {
-        // console.log(movies[Indexmovie])
-
+    const moviesList = Object.keys(movies).map((key, Indexmovie) => {
         return <MovieCard
             key={key}
+            id={movies[Indexmovie].id}
             title={movies[Indexmovie].title}
             img={movies[Indexmovie].poster_path}
-            ShowHide={HideShowFullContinueHandler}
-            purchaseContinued={HideShowFullContinueHandler}
+            ShowHideHandler={HideShowHandler}
+            SelectedMovieHandler={SelectedHandler}
+            SelectedMovie={selectedMovieId}
+            show={showFull}
         />
     })
 
-
-    return (
-        < >
+    let modal;
+    if (showFull === true) {
+        let selecedMovie = findMovieByID(selectedMovieId)
+        console.log(selecedMovie[0])//backdrop_path
+        modal =
             <Modal
                 show={showFull}
-                ShowHideBackD={HideShowFullContinueHandler}
-            >
-                <FullMovie />
-            </Modal>
+                ShowHideHandler={HideShowHandler}
+                title={selecedMovie[0].title}
+                imgCover={selecedMovie[0].backdrop_path}
+            />
+    }
+    else modal = null;
+
+    return (
+        <>
+            { modal}
             <ul className="movies">
-                {moviesTo}
+                {moviesList}
             </ul>
-        </ >
+        </>
     )
 }

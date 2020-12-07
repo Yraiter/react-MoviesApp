@@ -5,7 +5,7 @@ import "./Backdrop.css";
 const backdrop = (props) => {
 
     console.log("this is a backdrop")
-    console.log(props)
+    // console.log(props)
     return (props.show ? <div className="Backdrop" onClick={props.clicked}></div> : null)
 
 };

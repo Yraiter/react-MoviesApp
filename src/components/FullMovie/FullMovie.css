@@ -1,39 +1,44 @@
-.FullMovie {
-    width: 500px;
-    height: 500px;
-    margin: 20px auto;
-    border: 1px solid #eee;
-    box-shadow: 0 2px 3px #ccc;
-    text-align: center;
-}
 
-.Edit {
+.fullMovie {
+    font: 14px/22px "Lato", Arial, sans-serif;
+    color: #a9a8a3;
+    padding: 40px 0;
+  }
 
-}
+.container {
+    margin: 0 auto;
+    width: 780px;
+    height: 640px;
+    background: #f0f0ed;
+    border-radius: 10px;
+    position: absolute;
+    z-index: 1;
+  }
 
-.Edit label {
-    display: block;
-    color: grey;
-}
-
-.Edit button {
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-    outline: none;
-    color: #fa923f;
-}
-
-.Edit button:hover,
-.Edit button:active {
-    color: #521751;
-}
-
-.Edit button.Delete {
-    color: red;
-}
-
-.Edit button.Delete:hover,
-.Edit button.Delete:active {
-    color: darkred;
-}
+  .hero {
+    height: 342px;
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    /* background: red; */
+  }
+  /* Before selctor set this part first */
+  .hero:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    /* background: red; */
+    /* background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/hobbit_bg.jpg"); */
+    z-index: -1;
+  
+    transform: skewY(-2.2deg);
+    transform-origin: 0 0;
+  
+  }

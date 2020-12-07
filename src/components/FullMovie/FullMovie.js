@@ -1,21 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import './FullMovie.css';
 
-const FullMovie = () => {
-    let post = <p>Please select a Post!</p>;
+const FullMovie = (props) => {
 
-    post = (
-        <div className="">
-            <h1>Title</h1>
-            <p>Content</p>
-            <div className="">
-                <button className="">Delete</button>
+
+    const imageUrl = "https://image.tmdb.org/t/p/original" + props.imgCover
+
+
+    useEffect(() => {
+        console.log("UseEffect in full movies")
+
+    }, [])
+    // <img src={imageUrl} alt={props.id} />
+    return (
+        <div className="container">
+            <img className="hero" src={imageUrl} alt=""
+                style={{
+                    height: "50%", width: "100%", transform: "skewY(-2.2deg)", "transform-origin": "0 0"
+                }} />
+            <div className="details">
+                <div className="title1">{props.title} <span>PG-13</span></div>
+
             </div>
-        </div>
+        </div >
     );
-
-    return post;
 }
 
 export default FullMovie
