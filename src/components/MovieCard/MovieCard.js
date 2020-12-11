@@ -1,28 +1,29 @@
 import React, { } from 'react';
-// import Flippy, { FrontSide, BackSide } from 'react-flippy';
-import MovieDetails from './MovieDetails/MovieDetails'
-// import Modal from '../../components/UI/Modal/Modal';
+//import MovieDetails from './MovieDetails/MovieDetails'
 
 import './movieCard.css';
 
 const movieCard = (props) => {
-    // const imageUrl = `https://image.tmdb.org/t/p/w342/${props.img}`
-    const clickHandler = (event) => {
-        console.log(event.target.alt)
-        props.ShowHideHandler();
-        props.SelectedMovieHandler(event.target.alt);
 
+
+    const clickHandler = (id, event) => {
+        event.preventDefault();
+        console.log(event)
+        console.log(id)
+        props.ShowHideHandler();
+        props.SelectedMovieHandler(id);
     }
 
-    const imageUrl = "https://image.tmdb.org/t/p/w342/" + props.img;
+    const imageUrl = "https://image.tmdb.org/t/p/w342/" + props.movieInfo.poster_path;
     return (
         <>
-            <li className="movie-item" onClick={clickHandler} >
-                <img src={imageUrl} alt={props.id} />
-                <div className="movie-description">
-                    <h2 value={props.id}>{props.title} </h2>
-                    <MovieDetails />
+            <li className="card" onClick={(event) => clickHandler(props.movieInfo.id, event)} >
+                <img src={imageUrl} alt=" " />
+                <div className="content">
+                    {/* <h2 className="title">{props.movieInfo.title}</h2> */}
+                    <button className="btn" onClick={(event) => clickHandler(props.movieInfo.id, event)}>Read More</button>
                 </div>
+                {/* <MovieDetails /> */}
             </li>
         </>
     )

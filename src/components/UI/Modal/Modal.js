@@ -16,7 +16,7 @@ const modal = (props) => {
                     transform: props.show ? 'translateY(0)' : 'translateY(-100vh)',
                     opacity: props.show ? '1' : '0'
                 }}>
-                <FullMovie title={props.title} imgCover={props.imgCover} />
+                <FullMovie movieInfo={props.movieInfo} imgCover={props.imgCover} />
             </div>
 
         </React.Fragment>

@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 
 import MovieCard from '../../components/MovieCard/MovieCard';
-// import FullMovie from '../../components/FullMovie/FullMovie';
 import Modal from '../../components/UI/Modal/Modal';
-
 
 import "./Movies.css";
 
@@ -48,15 +46,14 @@ export default function Movies() {
     }
 
     const moviesList = Object.keys(movies).map((key, Indexmovie) => {
+        // console.log(movies[Indexmovie])
         return <MovieCard
             key={key}
-            id={movies[Indexmovie].id}
-            title={movies[Indexmovie].title}
-            img={movies[Indexmovie].poster_path}
             ShowHideHandler={HideShowHandler}
             SelectedMovieHandler={SelectedHandler}
             SelectedMovie={selectedMovieId}
             show={showFull}
+            movieInfo={movies[Indexmovie]}
         />
     })
 
@@ -68,8 +65,7 @@ export default function Movies() {
             <Modal
                 show={showFull}
                 ShowHideHandler={HideShowHandler}
-                title={selecedMovie[0].title}
-                imgCover={selecedMovie[0].backdrop_path}
+                movieInfo={selecedMovie[0]}
             />
     }
     else modal = null;
