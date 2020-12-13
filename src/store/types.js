@@ -1,0 +1,4 @@
+export const GET_GENERS = 'GET_GENERS';
+export const GET_SPECIFIC_GENER = 'GET_SPECIFIC_GENER';
+export const SET_GENERS = 'SET_GENERS';
+export const GENERS_ERROR = 'GENERS_ERROR';

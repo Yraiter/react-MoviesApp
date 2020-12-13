@@ -3,13 +3,16 @@ import React from 'react'
 import Movies from '../Movies/Movies';
 import Sidebar from '../Sidebar/Sidebar';
 import Header from '../Header/Header';
+import { Provider } from 'react-redux';
+import store from '../../store/store'
 import './MainPage.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, } from 'react-router-dom'; //Route
 
 class MainPage extends React.Component {
 
 
     render() {
+
         return (
             <>
                 <Router>
@@ -19,15 +22,16 @@ class MainPage extends React.Component {
                     </Switch>
                 </Router>
                 <section className="main">
-                    <Sidebar />
-                    <Movies />
+                    <Provider store={store}>
+                        <Sidebar />
+                        <Movies />
+                    </Provider>
                 </section>
             </>
         );
     }
 }
-
-export default MainPage;
+export default (MainPage)
 
 
 

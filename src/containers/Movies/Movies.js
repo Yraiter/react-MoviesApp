@@ -42,7 +42,6 @@ export default function Movies() {
                 return movies[Indexmovie]
             }
         })
-
     }
 
     const moviesList = Object.keys(movies).map((key, Indexmovie) => {
