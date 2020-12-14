@@ -1,12 +1,12 @@
 // import React, { Component } from 'react';
 import React from 'react'
+import { BrowserRouter as Router, Switch, } from 'react-router-dom'; //Route
+
 import Movies from '../Movies/Movies';
 import Sidebar from '../Sidebar/Sidebar';
 import Header from '../Header/Header';
-import { Provider } from 'react-redux';
-import store from '../../store/store'
+
 import './MainPage.css';
-import { BrowserRouter as Router, Switch, } from 'react-router-dom'; //Route
 
 class MainPage extends React.Component {
 
@@ -22,10 +22,8 @@ class MainPage extends React.Component {
                     </Switch>
                 </Router>
                 <section className="main">
-                    <Provider store={store}>
-                        <Sidebar />
-                        <Movies />
-                    </Provider>
+                    <Sidebar />
+                    <Movies />
                 </section>
             </>
         );
