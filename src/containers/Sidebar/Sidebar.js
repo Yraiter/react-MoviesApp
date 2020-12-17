@@ -8,8 +8,6 @@ import './Sidebar.css'
 
 const Sidebar = ({ genersData, fetchGeners }) => {
 
-
-
     useEffect(() => {
         fetchGeners()
     }, [fetchGeners])

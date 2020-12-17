@@ -13,7 +13,7 @@ const movieCard = (props) => {
         props.ShowHideHandler();
         props.SelectedMovieHandler(id);
     }
-
+    // console.log(props)
     const imageUrl = "https://image.tmdb.org/t/p/w342/" + props.movieInfo.poster_path;
     return (
         <>

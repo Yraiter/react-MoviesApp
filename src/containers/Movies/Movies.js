@@ -1,30 +1,24 @@
 import React, { useState, useEffect } from "react";
-import axios from 'axios';
+import { connect } from 'react-redux'
+// import axios from 'axios';
 
+import { fetchMovies } from '../../redux'
 import MovieCard from '../../components/MovieCard/MovieCard';
 import Modal from '../../components/UI/Modal/Modal';
 
 import "./Movies.css";
 
-export default function Movies() {
+const Movies = ({ moviesData, fetchMovies }) => {
 
     //create states using hooks
-    const [movies, setMovies] = useState('')
+    // const [movies, setMovies] = useState('')
     const [selectedMovieId, setSelectedMovieID] = useState(null)
     const [showFull, setShowFull] = useState(false)
 
 
     useEffect(() => {
-        axios.get(`https://api.themoviedb.org/3/discover/movie?api_key=ab2fefad2fb133b8288873e93a86f02e&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
-            .then((response) => {
-                console.log("this is api jet" + process.env.REACT_APP_TMDB_API_KEY)
-                const moviesRes = response.data.results
-                // console.log(moviesRes)
-                // console.log(moviesRes)
-                setMovies(moviesRes)
-            })
-            .catch(err => console.log("this is an error" + err))
-    }, [])
+        fetchMovies()
+    }, [fetchMovies])
 
     const SelectedHandler = id => {
         console.log(id)
@@ -37,22 +31,24 @@ export default function Movies() {
 
     const findMovieByID = (id) => {
         console.log("findMovie BY ID: " + id)
-        return movies.filter((key, Indexmovie) => {
-            if (movies[Indexmovie].id == id) {
-                return movies[Indexmovie]
+        return moviesData.movies.filter((key, Indexmovie) => {
+            // eslint-disable-next-line eqeqeq
+            if (moviesData.movies[Indexmovie].id == id) {
+                return moviesData.movies[Indexmovie]
             }
+            else return null
         })
     }
 
-    const moviesList = Object.keys(movies).map((key, Indexmovie) => {
-        // console.log(movies[Indexmovie])
+    const moviesList = Object.keys(moviesData.movies).map((key, Indexmovie) => {
+        // console.log(moviesData)
         return <MovieCard
             key={key}
             ShowHideHandler={HideShowHandler}
             SelectedMovieHandler={SelectedHandler}
             SelectedMovie={selectedMovieId}
             show={showFull}
-            movieInfo={movies[Indexmovie]}
+            movieInfo={moviesData.movies[Indexmovie]}
         />
     })
 
@@ -78,3 +74,23 @@ export default function Movies() {
         </>
     )
 }
+
+
+
+const mapStateToProps = state => {
+    return {
+        moviesData: state.movies
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchMovies: async () => await dispatch(await fetchMovies())
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Movies)
+

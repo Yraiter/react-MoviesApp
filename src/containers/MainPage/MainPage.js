@@ -22,16 +22,20 @@ class MainPage extends React.Component {
                     </Switch>
                 </Router>
                 <section className="main">
-                    <Sidebar />
-                    <Movies />
+                    <div id="header">
+                        <h3>Studytonight.com</h3>
+                    </div>
+                    <Sidebar className="sidebar" />
+                    <div id="content">
+                        <Movies />
+                    </div>
+                    <div id="footer">&copy; 2017 Studytonight. All rights reserved.</div>
                 </section>
             </>
-        );
+        )
     }
 }
 export default (MainPage)
-
-
 
 
 

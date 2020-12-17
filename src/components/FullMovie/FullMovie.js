@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { connect } from 'react-redux'
 import ReadMore from 'read-more-react';
 
 import './FullMovie.css';
@@ -10,11 +11,26 @@ const FullMovie = (props) => {
     const year = props.movieInfo.release_date.split("-")[0]
     const genres = props.movieInfo.genre_ids
     const overview = props.movieInfo.overview
-    console.log(genres)
 
     useEffect(() => {
         console.log("UseEffect in full movies")
     }, [])
+
+    let genresList = genres.map(generID => {
+        let res = props.genersData.geners.find(gener => {
+            // eslint-disable-next-line eqeqeq
+            if (gener.id == generID) {
+                return gener.name
+            }
+            else return null
+        })
+        // console.log(res)
+        return res.name
+    })
+
+    console.log(genresList)
+    let generToShow = genresList.join(', ')
+
 
     // TODO: Need to divide to components 
     return (
@@ -24,8 +40,8 @@ const FullMovie = (props) => {
                     <img className="locandina" src={imagePosterUrl} alt=" " />
                     <h1>{props.movieInfo.title}</h1>
                     <h4>{year}, David Ayer</h4>
+                    <p className="type">{generToShow}</p>
                     <span className="minutes">117 min</span>
-                    <p className="type">Action, Crime, Fantasy</p>
                 </div>
                 <div className="movie_desc">
                     <ReadMore
@@ -50,6 +66,20 @@ const FullMovie = (props) => {
     );
 }
 
+const mapStateToProps = state => {
+    return {
+        genersData: state.geners
+    }
+}
 
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         fetchGeners: async () => await dispatch(await fetchGeners())
+//     }
+// }
 
-export default FullMovie
+export default connect(
+    mapStateToProps,
+    // mapDispatchToProps
+)(FullMovie)
+
