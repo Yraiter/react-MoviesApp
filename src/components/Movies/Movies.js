@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from 'react-redux'
-// import axios from 'axios';
-
 import { fetchMovies } from '../../redux'
-import MovieCard from '../../components/MovieCard/MovieCard';
-import Modal from '../../components/UI/Modal/Modal';
-
+import MovieCard from './MovieCard/MovieCard';
+import Modal from '../UI/Modal/Modal';
 import "./Movies.css";
 
 const Movies = ({ moviesData, fetchMovies }) => {
@@ -17,6 +14,7 @@ const Movies = ({ moviesData, fetchMovies }) => {
 
 
     useEffect(() => {
+        console.log("Use useEffect in Movies")
         fetchMovies()
     }, [fetchMovies])
 
@@ -41,7 +39,6 @@ const Movies = ({ moviesData, fetchMovies }) => {
     }
 
     const moviesList = Object.keys(moviesData.movies).map((key, Indexmovie) => {
-        // console.log(moviesData)
         return <MovieCard
             key={key}
             ShowHideHandler={HideShowHandler}
@@ -85,7 +82,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchMovies: async () => await dispatch(await fetchMovies())
+        fetchMovies: async () => dispatch(await fetchMovies())
     }
 }
 

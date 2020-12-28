@@ -15,26 +15,31 @@ const FullMovie = (props) => {
     useEffect(() => {
         console.log("UseEffect in full movies")
     }, [])
+    console.log("Props from fullmovie", props)
+
+    console.log("geners of movie", genres)
 
     let genresList = genres.map(generID => {
+        console.log("FullMovie genreID", generID)
         let res = props.genersData.geners.find(gener => {
             // eslint-disable-next-line eqeqeq
+            console.log("this is gener in FullMovie", gener)
             if (gener.id == generID) {
                 return gener.name
             }
             else return null
         })
-        // console.log(res)
+        console.log(res)
         return res.name
     })
 
-    console.log(genresList)
+    // console.log(genresList)
     let generToShow = genresList.join(', ')
 
 
     // TODO: Need to divide to components 
     return (
-        <div className="container">
+        <div className="fullMovieContainer">
             <div className="info_section">
                 <div className="movie_header">
                     <img className="locandina" src={imagePosterUrl} alt=" " />

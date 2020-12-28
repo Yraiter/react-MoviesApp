@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400');
+  
+  .ItemManger-label {
+    box-sizing: inherit;
+    font-family: inherit;
+    line-height: inherit;
+    overflow: visible;
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    transition: 0.4s;
+    outline: none;
+    display: block;
+    position: relative;
+    width: auto;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    /* color: #fff; */
+    height: 30px;
+    margin-right: 12px;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+  }
+
+  .open .ItemManger-label:after {
+    transform: rotate(180deg);
+        height: 100px;
+    overflow-y: scroll;
+  }
+

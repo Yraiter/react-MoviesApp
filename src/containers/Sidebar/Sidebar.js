@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { fetchGeners } from '../../redux'
 
 
-import './Sidebar.css'
+// import './Sidebar.css'
 
 const Sidebar = ({ genersData, fetchGeners }) => {
 

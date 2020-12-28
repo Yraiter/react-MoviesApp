@@ -1,6 +1,6 @@
 .Nav {
   background: #000;
-  height: 80px;
+  height: 45px;
   display: flex;
   justify-content: space-between;
   padding: 0.5rem calc((100vw - 1000px) / 2);
@@ -79,7 +79,7 @@
   } */
 }
   
-  header h1 {
+  /* header h1 {
     font-size: 2rem;
     color: #3f65e2;
-  }
+  } */

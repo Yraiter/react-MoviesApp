@@ -8,6 +8,7 @@ import {
 export const fetchMovies = () => {
     return (dispatch) => {
         dispatch(fetchUsersRequest())
+        console.log("fetch movies from axios and redux")
         axios
             .get(`https://api.themoviedb.org/3/discover/movie?api_key=ab2fefad2fb133b8288873e93a86f02e&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`)
             .then(response => {

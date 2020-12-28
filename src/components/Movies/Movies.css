@@ -1,12 +1,3 @@
-/* .movies {
-  flex-basis: 95%;
-  display: flex;
-  flex-wrap: wrap;
-
-  margin: 0;
-  padding: 20px 0;
-}  */
-
 @import url("https://fonts.googleapis.com/css?family=Cardo:400i|Rubik:400,700&display=swap");
 :root {
   --d: 700ms;
@@ -15,22 +6,8 @@
   --font-serif: "Cardo", serif;
 }
 
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  height: 100%;
-}
-
-body {
-  display: grid;
-  /* place-items: center; */
-} 
-
 .movies {
-   place-items: center;
+  place-items: center;
   display: align;
   margin: 0;
   padding: 20px 0;
@@ -43,7 +20,7 @@ body {
 }
 @media (min-width: 600px) {
   .movies {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 @media (min-width: 800px) {

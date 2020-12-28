@@ -1,8 +1,7 @@
 import React from 'react';
-
-import "./Modal.css";
 import Backdrop from '../BackDrop/Backdrop';
-import FullMovie from '../../FullMovie/FullMovie';
+import FullMovie from '../../Movies/FullMovie/FullMovie';
+import "./Modal.css";
 
 const modal = (props) => {
     // console.log(props.fullMovie)

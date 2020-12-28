@@ -19,11 +19,10 @@ const movieCard = (props) => {
         <>
             <li className="card" onClick={(event) => clickHandler(props.movieInfo.id, event)} >
                 <img src={imageUrl} alt=" " />
-                <div className="content">
+                <div className="cardContent">
                     {/* <h2 className="title">{props.movieInfo.title}</h2> */}
                     <button className="btn" onClick={(event) => clickHandler(props.movieInfo.id, event)}>Read More</button>
                 </div>
-                {/* <MovieDetails /> */}
             </li>
         </>
     )

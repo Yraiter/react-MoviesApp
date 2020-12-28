@@ -38,7 +38,7 @@
   .card {
     transition: 1s ease;
     cursor: pointer;
-    margin:30px;
+    margin:0px 40px 30px 30px;
   }
   .card:before {
     content: "";
@@ -66,7 +66,7 @@
     transition: transform calc(var(--d) * 2) var(--e);
   }
 
-  .content {
+  .cardContent {
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -77,7 +77,7 @@
     z-index: 1;
     bottom: 10px;
   }
-  .content > * + * {
+  .cardContent > * + * {
     margin-top: 1rem;
   }
   
@@ -112,10 +112,10 @@
       transform: translateY(0);
     }
   
-    .content {
+    .cardContent {
       transform: translateY(calc(100% - 4.5rem));
     }
-    .content > *:not(.title) {
+    .cardContent > *:not(.title) {
       opacity: 0;
       transform: translateY(1rem);
       transition: transform var(--d) var(--e), opacity var(--d) var(--e);
@@ -133,20 +133,20 @@
   .card:focus-within:after {
       transform: translateY(-50%);
     }
-    .card:hover .content,
-  .card:focus-within .content {
+    .card:hover .cardContent,
+  .card:focus-within .cardContent {
       transform: translateY(0);
     }
-    .card:hover .content > *:not(.title),
-  .card:focus-within .content > *:not(.title) {
+    .card:hover .cardContent > *:not(.title),
+  .card:focus-within .cardContent > *:not(.title) {
       opacity: 1;
       transform: translateY(0);
       transition-delay: calc(var(--d) / 8);
     }
   
     .card:focus-within:before, .card:focus-within:after,
-  .card:focus-within .content,
-  .card:focus-within .content > *:not(.title) {
+  .card:focus-within .cardContent,
+  .card:focus-within .cardContent > *:not(.title) {
       transition-duration: 0s;
     }
   }
