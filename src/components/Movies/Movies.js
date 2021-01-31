@@ -3,23 +3,25 @@ import { connect } from 'react-redux'
 import { fetchMovies } from '../../redux'
 import MovieCard from './MovieCard/MovieCard';
 import Modal from '../UI/Modal/Modal';
-import "./Movies.css";
+import "./Movies.scss";
 
-const Movies = ({ moviesData, fetchMovies }) => {
+const Movies = ({ moviesData, fetchMovies, loader }) => {
 
-    //create states using hooks
     // const [movies, setMovies] = useState('')
     const [selectedMovieId, setSelectedMovieID] = useState(null)
     const [showFull, setShowFull] = useState(false)
+    const [loading, setLoading] = useState(loader)
 
 
     useEffect(() => {
         console.log("Use useEffect in Movies")
         fetchMovies()
     }, [fetchMovies])
+    useEffect(() => {
+        setLoading(loader)
+    }, [loader])
 
     const SelectedHandler = id => {
-        console.log(id)
         setSelectedMovieID(id);
     }
 
@@ -28,31 +30,30 @@ const Movies = ({ moviesData, fetchMovies }) => {
     }
 
     const findMovieByID = (id) => {
-        console.log("findMovie BY ID: " + id)
-        return moviesData.movies.filter((key, Indexmovie) => {
+        return moviesData.filter((key, Indexmovie) => {
             // eslint-disable-next-line eqeqeq
-            if (moviesData.movies[Indexmovie].id == id) {
-                return moviesData.movies[Indexmovie]
+            if (moviesData[Indexmovie].id == id) {
+                return moviesData[Indexmovie]
             }
             else return null
         })
     }
 
-    const moviesList = Object.keys(moviesData.movies).map((key, Indexmovie) => {
+    const moviesList = moviesData.map((movie) => {
         return <MovieCard
-            key={key}
+            key={movie.id}
             ShowHideHandler={HideShowHandler}
             SelectedMovieHandler={SelectedHandler}
             SelectedMovie={selectedMovieId}
             show={showFull}
-            movieInfo={moviesData.movies[Indexmovie]}
+            movieInfo={movie}
         />
     })
 
     let modal;
     if (showFull === true) {
         let selecedMovie = findMovieByID(selectedMovieId)
-        console.log(selecedMovie[0])//backdrop_path
+        // console.log(selecedMovie[0])//backdrop_path
         modal =
             <Modal
                 show={showFull}
@@ -62,6 +63,12 @@ const Movies = ({ moviesData, fetchMovies }) => {
     }
     else modal = null;
 
+    if (loading) {
+        return <div id="searchNotFound">Loading movies...</div>
+    }
+    if (moviesData.length === 0) {
+        return <div id="searchNotFound">Sorry, No Movies found related to search term</div>
+    }
     return (
         <>
             { modal}
@@ -72,11 +79,25 @@ const Movies = ({ moviesData, fetchMovies }) => {
     )
 }
 
-
+function getVisibleMovies(data) {
+    return data.movies
+        .filter(m => {
+            // console.log("title_searchterm", m.title, data.search_term)
+            return (
+                // (data.search_term === '' || m.title.toLowerCase().indexOf(data.search_term.toLowerCase()) > -1) &&
+                (data.genre === '' || m.genre_ids.includes(data.genre.id)) &&
+                // (data.quality === 'all' || m.genre_ids.includes(data.quality)) && 
+                (m.vote_average >= data.rating.min && m.vote_average <= data.rating.max) &&
+                (m.release_year >= data.release_year.min && m.release_year <= data.release_year.max)
+            );
+        });
+}
 
 const mapStateToProps = state => {
+    // console.log({ state });
     return {
-        moviesData: state.movies
+        moviesData: getVisibleMovies(state.movies),
+        loader: state.movies.loading
     }
 }
 

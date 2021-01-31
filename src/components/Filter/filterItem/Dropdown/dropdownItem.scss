@@ -1,0 +1,71 @@
+.dropdown-option {
+  padding: 12px 6px;
+  margin: 0;
+  z-index: 2;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 400;
+  list-style: none;
+  pointer-events: auto;
+  direction: ltr;
+  box-sizing: inherit;
+  display: block;
+  line-height: 15px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+  position: relative;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.4s ease;
+  letter-spacing: 0.4px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.14);
+    cursor: pointer;
+    color: #ffd80e;
+  }
+}
+
+/* ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    list-style: none;
+    pointer-events: auto;
+    direction: ltr;
+    box-sizing: inherit;
+    display: block;
+    line-height: 30px;
+    font-size: 16px;
+    color: rgba(255,255,255,0.7);
+    position: relative;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.4s ease;
+    letter-spacing: 0.4px;
+  } */
+/* li {
+    padding: 8px 12px;
+    -webkit-tap-highlight-color: transparent;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -webkit-box-direction: normal;
+    list-style: none;
+    pointer-events: auto;
+    direction: ltr;
+    box-sizing: inherit;
+    display: block;
+    line-height: 40px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.7);
+    position: relative;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.4s ease;
+    letter-spacing: 0.4px;
+    
+  } */

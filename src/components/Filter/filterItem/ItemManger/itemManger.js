@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import ItemMenu from './ItemMenu/ItemMenu'
-import './itemManger.css'
+import './itemManger.scss'
 
 
 const ItemManger = (props) => {
@@ -23,11 +23,6 @@ const ItemManger = (props) => {
             return React.cloneElement(child, clonedProps);
         }
     );
-
-
-    useEffect(() => {
-        console.log("UseEffect dropdown")
-    }, [])
 
     return (
         <div className={className}

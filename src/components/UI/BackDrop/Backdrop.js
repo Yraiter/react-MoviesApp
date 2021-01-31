@@ -1,12 +1,11 @@
 import React from 'react';
 
-import "./Backdrop.css";
+import "./Backdrop.scss";
 
 const backdrop = (props) => {
 
-    console.log("this is a backdrop")
     // console.log(props)
-    return (props.show ? <div className="Backdrop" onClick={props.clicked}></div> : null)
+    return (props.show ? <div className="Backdrop Modal-backdrop show" onClick={props.clicked}></div> : null)
 
 };
 

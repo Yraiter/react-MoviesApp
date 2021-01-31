@@ -1,5 +1,5 @@
 import React from 'react'
-import './filterButton.css'
+import './filterButton.scss'
 
 const FilterButton = (props) => {
     return (

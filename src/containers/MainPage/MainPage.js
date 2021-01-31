@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react';
 import Movies from '../../components/Movies/Movies';
 import Sidebar from '../Sidebar/Sidebar';
 import Filter from '../../components/Filter/mainFilter';
-// import Header from '../Header/Header';
+import Header from '../Header/Header';
 
-import './MainPage.css';
+import './MainPage.scss';
 
 function MainPage() {
     const [filterbar, setFilterbar] = useState("filterbar");
@@ -25,11 +25,6 @@ function MainPage() {
             settoggleFlag(true)
         }
     }
-
-    useEffect(() => {
-        console.log("UseEffect")
-    }, [])
-
 
 
     //     <>
@@ -53,7 +48,9 @@ function MainPage() {
 
     return (
         <div className="mainContainer">
-            <div className="header">Header</div>
+            <div className="header">
+                <Header />
+            </div>
             <div className={filterbar}>
                 <Filter />
             </div>
@@ -67,7 +64,7 @@ function MainPage() {
                     toggle
                 </button>
             </div>
-            <Sidebar />
+            {/* <Sidebar /> */}
         </div>
     );
 }

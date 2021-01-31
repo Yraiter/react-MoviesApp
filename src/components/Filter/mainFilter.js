@@ -1,48 +1,67 @@
 import React, { useState, useEffect } from 'react'
 import Item from './filterItem/filterItem'
-import './mainFilter.css';
+import { connect } from 'react-redux'
+import './mainFilter.scss';
 
-const Filter = (ptops) => {
+const Filter = ({selectedGenre, selectedQuality, selectedRating, selectedReleaseYear}) => {
 
-    const [generMenuClass, setgenerMenuCls] = useState(["filter__item-btn", false])
-    const [raitingMenuClass, setRaitingMenuCls] = useState(["filter__item-btn", false])
+    const [generMenuClass, setGenerMenuCls] = useState(["filter__item-btn", false])
+    const [qualityMenuClass, setQualityMenuCls] = useState(["filter__item-btn", false])
+    const [ratingMenuClass, setRatingMenuCls] = useState(["filter__item-btn", false])
     const [realeseMenuClass, setRealeseMenuCls] = useState(["filter__item-btn", false])
     const [isOpenNow, setIsOpenNow] = useState(0);
 
-    //?: this funcion constrol the menu open and close functionality
+    //?: this funcion control the menu open and close functionality
     const menuHandler = (menuFlag) => {
-        console.log(menuFlag)
+        // console.log(menuFlag)
         if (menuFlag === 1) {
             if (isOpenNow !== 1) {
-                setgenerMenuCls(["filter__item-btn true", true])
+                setGenerMenuCls(["filter__item-btn true", true])
                 setIsOpenNow(1)
             }
             else {
-                setgenerMenuCls(["filter__item-btn", false])
+                setGenerMenuCls(["filter__item-btn", false])
                 setIsOpenNow(0)
 
             }
-            setRaitingMenuCls(["filter__item-btn", false])
+            setQualityMenuCls(["filter__item-btn", false])
+            setRatingMenuCls(["filter__item-btn", false])
             setRealeseMenuCls(["filter__item-btn", false])
         }
         else if (menuFlag === 2) {
             if (isOpenNow !== 2) {
-                setRaitingMenuCls(["filter__item-btn true", true])
+                setQualityMenuCls(["filter__item-btn true", true])
                 setIsOpenNow(2)
             }
             else {
-                setRaitingMenuCls(["filter__item-btn", false])
+                setQualityMenuCls(["filter__item-btn", false])
                 setIsOpenNow(0)
 
             }
 
-            setgenerMenuCls(["filter__item-btn", false])
+            setGenerMenuCls(["filter__item-btn", false])
+            setRatingMenuCls(["filter__item-btn", false])
+            setRealeseMenuCls(["filter__item-btn", false])
+        }
+        else if (menuFlag === 3) {
+            if (isOpenNow !== 3) {
+                setRatingMenuCls(["filter__item-btn true", true])
+                setIsOpenNow(3)
+            }
+            else {
+                setRatingMenuCls(["filter__item-btn", false])
+                setIsOpenNow(0)
+
+            }
+
+            setGenerMenuCls(["filter__item-btn", false])
+            setQualityMenuCls(["filter__item-btn", false])
             setRealeseMenuCls(["filter__item-btn", false])
         }
         else {
-            if (isOpenNow !== 3) {
+            if (isOpenNow !== 4) {
                 setRealeseMenuCls(["filter__item-btn true", true])
-                setIsOpenNow(3)
+                setIsOpenNow(4)
 
             }
             else {
@@ -51,13 +70,13 @@ const Filter = (ptops) => {
 
             }
 
-            setgenerMenuCls(["filter__item-btn", false])
-            setRaitingMenuCls(["filter__item-btn", false])
+            setGenerMenuCls(["filter__item-btn", false])
+            setQualityMenuCls(["filter__item-btn", false])
+            setRatingMenuCls(["filter__item-btn", false])
         }
     }
 
     useEffect(() => {
-        console.log("useEffect")
         return function cleanup() {
             console.log("cleNuP")
         }
@@ -70,13 +89,15 @@ const Filter = (ptops) => {
         MenuFlag: name of atributs in Item 
         TODO: ->  Info: can be a input range values or dropdown items 
     */
+//    console.log({selectedGenre});
     return (
         <div className="mainFilteContainer">
             <div className="filter__content">
                 <div className="filter__items">
-                    <Item label="GENRE" menuHandlerOpen={() => menuHandler(1)} menuOpenFlag={generMenuClass} />
-                    <Item label="RAITING" menuHandlerOpen={() => menuHandler(2)} menuOpenFlag={raitingMenuClass} />
-                    <Item label="RELEASE YEAR" menuHandlerOpen={() => menuHandler(3)} menuOpenFlag={realeseMenuClass} />
+                    <Item filter="genre" label="GENRE" selectedGenre={selectedGenre} menuHandlerOpen={() => menuHandler(1)} menuOpenFlag={generMenuClass} />
+                    <Item filter="quality" label="QUALITY" selectedQuality={selectedQuality} menuHandlerOpen={() => menuHandler(2)} menuOpenFlag={qualityMenuClass} />
+                    <Item filter="rating" label="RATING" selectedRating={selectedRating} menuHandlerOpen={() => menuHandler(3)} menuOpenFlag={ratingMenuClass} />
+                    <Item filter="release_year" label="RELEASE YEAR" selectedReleaseYear={selectedReleaseYear} menuHandlerOpen={() => menuHandler(4)} menuOpenFlag={realeseMenuClass} />
                 </div>
                 <button className="apply_filter__btn">apply filter</button>
             </div>
@@ -85,5 +106,17 @@ const Filter = (ptops) => {
     )
 }
 
-export default Filter
+const mapStateToProps = state => {
+    // console.log({ Filterstate: state });
+    return {
+        selectedGenre: state.movies.genre,
+        selectedQuality: state.movies.quality,
+        selectedRating: state.movies.rating,
+        selectedReleaseYear: state.movies.release_year,
+    }
+}
+
+export default connect(
+    mapStateToProps
+)(Filter)
 

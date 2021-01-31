@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux'
 import ReadMore from 'read-more-react';
 
-import './FullMovie.css';
+import './FullMovie.scss';
 
 const FullMovie = (props) => {
 
@@ -12,40 +12,43 @@ const FullMovie = (props) => {
     const genres = props.movieInfo.genre_ids
     const overview = props.movieInfo.overview
 
-    useEffect(() => {
-        console.log("UseEffect in full movies")
-    }, [])
-    console.log("Props from fullmovie", props)
+    // useEffect(() => {
+    //     console.log("UseEffect in full movies")
+    // }, [])
+    // console.log("Props from fullmovie", props)
 
-    console.log("geners of movie", genres)
+    // console.log("genres of movie", genres)
 
-    let genresList = genres.map(generID => {
-        console.log("FullMovie genreID", generID)
-        let res = props.genersData.geners.find(gener => {
+    let genresList = genres.map(genreID => {
+        // console.log("FullMovie genreID", genreID)
+        let res = props.genresData.genres.find(genre => {
             // eslint-disable-next-line eqeqeq
-            console.log("this is gener in FullMovie", gener)
-            if (gener.id == generID) {
-                return gener.name
+            // console.log("this is genre in FullMovie", genre)
+            if (genre.id == genreID) {
+                return genre.name
             }
             else return null
         })
-        console.log(res)
+        // console.log(res)
         return res.name
     })
 
     // console.log(genresList)
-    let generToShow = genresList.join(', ')
+    let genreToShow = genresList.join(', ')
 
 
     // TODO: Need to divide to components 
     return (
         <div className="fullMovieContainer">
+            <button type="button" className="close" data-dismiss="Modal" aria-label="Close" onClick={props.ShowHideHandler}>
+                <span aria-hidden="true">&times;</span>
+            </button>
             <div className="info_section">
                 <div className="movie_header">
                     <img className="locandina" src={imagePosterUrl} alt=" " />
                     <h1>{props.movieInfo.title}</h1>
                     <h4>{year}, David Ayer</h4>
-                    <p className="type">{generToShow}</p>
+                    <p className="type">{genreToShow}</p>
                     <span className="minutes">117 min</span>
                 </div>
                 <div className="movie_desc">
@@ -73,13 +76,13 @@ const FullMovie = (props) => {
 
 const mapStateToProps = state => {
     return {
-        genersData: state.geners
+        genresData: state.filters
     }
 }
 
 // const mapDispatchToProps = dispatch => {
 //     return {
-//         fetchGeners: async () => await dispatch(await fetchGeners())
+//         fetchGenres: async () => await dispatch(await fetchGenres())
 //     }
 // }
 

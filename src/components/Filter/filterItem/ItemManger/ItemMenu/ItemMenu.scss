@@ -1,0 +1,30 @@
+.ItemMenu-select {
+  position: absolute;
+  top: 58px;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  max-height: 0;
+  height: auto;
+  transition: 500ms ease-in-out;
+  list-style: none;
+  padding: 0;
+  letter-spacing: 0.4px;
+  background-color: #1a191f;
+  margin-top: 0;
+  min-width: 10rem;
+  border-radius: 0px 0px 4px 4px;
+
+  &.open-dropdown {
+    max-height: 225px;
+    border-radius: 0px 0px 20px 20px;
+  }
+  &.open-range {
+    max-height: 100vh;
+    border-radius: 0px 0px 5px 5px;
+    padding: 10%;
+    z-index: 100;
+  }
+}

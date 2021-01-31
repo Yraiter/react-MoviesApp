@@ -1,15 +1,15 @@
 import React, { } from 'react';
 //import MovieDetails from './MovieDetails/MovieDetails'
 
-import './movieCard.css';
+import './movieCard.scss';
 
 const movieCard = (props) => {
 
 
     const clickHandler = (id, event) => {
         event.preventDefault();
-        console.log(event)
-        console.log(id)
+        // console.log(event)
+        // console.log(id)
         props.ShowHideHandler();
         props.SelectedMovieHandler(id);
     }

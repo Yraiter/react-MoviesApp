@@ -1,3 +1,3 @@
 
-export * from './geners/genersActions'
+export * from './filters/filtersActions'
 export * from './movies/moviesActions'

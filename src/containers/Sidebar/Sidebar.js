@@ -1,22 +1,22 @@
 import React, { useEffect } from 'react'//{/*useState*/ }
 import { Multiselect } from 'multiselect-react-dropdown';
 import { connect } from 'react-redux'
-import { fetchGeners } from '../../redux'
+import { fetchGenres } from '../../redux'
 
 
-// import './Sidebar.css'
+// import './Sidebar.scss'
 
-const Sidebar = ({ genersData, fetchGeners }) => {
+const Sidebar = ({ genresData, fetchGenres }) => {
 
     useEffect(() => {
-        fetchGeners()
-    }, [fetchGeners])
+        fetchGenres()
+    }, [fetchGenres])
 
     return (
         <div className="sidebar">
             {/* {sidebar} */}
             <Multiselect
-                options={genersData.geners}// Options to display in the dropdown
+                options={genresData}// Options to display in the dropdown
                 displayValue="name" // Property name to display in the dropdown options
             // selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
             // onSelect={this.onSelect} // Function will trigger on select event
@@ -30,13 +30,13 @@ const Sidebar = ({ genersData, fetchGeners }) => {
 
 const mapStateToProps = state => {
     return {
-        genersData: state.geners
+        genresData: state.filters.genres
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchGeners: async () => await dispatch(await fetchGeners())
+        fetchGenres: async () => await dispatch(await fetchGenres())
     }
 }
 
